@@ -3,6 +3,7 @@ dotenv.config();
 import express from "express";
 import http from "http";
 import bodyParser from "body-parser";
+import fetch from "node-fetch";
 import { ElectrumClient } from "electrum-cash";
 
 const electrum = new ElectrumClient(
