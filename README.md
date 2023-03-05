@@ -2,5 +2,5 @@
 
 Viewer app (demo)
 
-https://ntviewer.netlify.app
+https://ntviewer.onrender.com
 
