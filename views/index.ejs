@@ -19,14 +19,36 @@
       <h1><img src="./img/nexalogo.png" alt="BCH" width="100"> Nexa Tokens and NFTs Viewer (demo)</h1>
       <p></p>
       <br>
-
       <div class="card text-dark">
         <div class="card-header">
           <h5>View tokens and NFTs created on the <a href="https://nexa.org">Nexa</a> (proof-of-work) blockchain</h5>
           <p><i>We use electrum-cash rostrum server method to get data from the blockchain</i></p>
         </div>
         <div class="card-body">
-          <p class="card-title">Group Id (token Id) examples:</p>
+          <h5 class="card-title"></h5>
+          <p class="card-text"></p>
+          <form action="/" method="post">
+            <input type="text" class="form-control" name="tokenid" placeholder="Group Id (token Id) e.g. nexa:tz0ptps4cu5m32lltm9v974wlgz5tf7j0z8dd5xd7unxdupghvqqq5zrm4pd0"><br>
+            <input type="submit" class="btn btn-primary btn-sm" value="View token or NFT"><br>
+          </form>
+          <br>
+          <p><img src="<%= tokenimage %>" width="300"></p>
+          <br>
+          <p><%= tokendescription %></p>
+          <br>
+          <p><%= content %></p>
+          <p><%= error %></p>
+          <br>
+        </div>
+      </div>
+
+      <br>
+      <div class="card text-white bg-secondary mb-3">
+        <div class="card-header">
+          <h5>Group Id (token Id) example</h5>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"></h5>
           <p class="card-text">
             nexa:trs2ccuvqmf62853mwt7ly478qkhjugrk92kfl6cf75yk8hssyqqqlcpr87w8<br>
             nexa:tpnl45e72t6lsdnkdzzrs0xk7w59vp0plkw6wtey03hlca2mvcqqqj9vxsmc0<br>
@@ -35,18 +57,10 @@
             nexa:tqqqr08dpmzdmqvx2ggdwpsxspfsfn32e8yxc70yu5xxmsatagqqqdt2z8shv<br>
             nexa:tqeu5wmfcymm0taasw5cwapcht9ch3faj0qkus6zu7smmdfnxqqqqpzgvqhsg<br>
             nexa:tp7ex7wn5sgtjwm3veptgxcjagxgd9tj4cp7z4p8uxxaku0dusqqqkm0v97dc<br>
-          </p><br>
-          <form action="/" method="post">
-            <input type="text" class="form-control" name="tokenid" placeholder="Group Id (token Id) e.g. nexa:tz0ptps4cu5m32lltm9v974wlgz5tf7j0z8dd5xd7unxdupghvqqq5zrm4pd0"><br>
-            <input type="submit" class="btn btn-primary btn-sm" value="View token or NFT"><br>
-          </form>
-          <br>
-          <p><img src="<%= tokenimage %>" width="300"></p>
-          <br>
-          <p><%= content %></p>
-          <p><%= error %></p>
+          </p>
         </div>
       </div>
+
     </div>  
     <p></p>
     <br><br>

@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
 app.get('/', function(req, res) {
-    res.render('index', { tokenimage: null, content: null, error: null });
+    res.render('index', { tokenimage: null, tokendescription: null, content: null, error: null });
 });
 
 app.post('/', async function(req, res) {
@@ -39,13 +39,17 @@ app.post('/', async function(req, res) {
             return response.json();
         })
         .then(function(obj) {
-            res.render('index', { tokenimage: obj[0]["icon"], content: "Token info: " + "Ticker: " + genesisInfo.ticker + ", " + "Name: " + genesisInfo.name + ", " + "Document url: " + genesisInfo.document_url + ", " + "Group id: " + genesisInfo.group + ", " + "Token id hex: " + genesisInfo.token_id_hex + ", " + "Txid: " + genesisInfo.txid + ", " + "Tx idem: " + genesisInfo.txidem + ", " + "Document hash: " + genesisInfo.document_hash, error: null });
+            res.render('index', { 
+            tokenimage: obj[0]["icon"], 
+            tokendescription: "Token info (metadata): " + "Ticker: " + obj[0]["ticker"] + ", " + "Name: " + obj[0]["name"] + ", " + "Summary: " + obj[0]["summary"] + ", " + "Description: " + obj[0]["description"], 
+            content: "Token info (blockchain): " + "Ticker: " + genesisInfo.ticker + ", " + "Name: " + genesisInfo.name + ", " + "Document url: " + genesisInfo.document_url + ", " + "Group id: " + genesisInfo.group + ", " + "Token id hex: " + genesisInfo.token_id_hex + ", " + "Txid: " + genesisInfo.txid + ", " + "Tx idem: " + genesisInfo.txidem + ", " + "Document hash: " + genesisInfo.document_hash, error: null 
+            });
         })
         } else if (url = !genesisInfo.document_url) {
-            res.render('index', { tokenimage: null, content: null, error: "This token has no .json url or it is invalid" });  
+            res.render('index', { tokenimage: null, tokendescription: null, content: null, error: "This token has no .json url or it is invalid" });  
         }
     } else if (tokenId = !req.body.tokenid) {
-        res.render('index', { tokenimage: null, content: null, error: "You need to provide valid Group Id/token Id" });
+        res.render('index', { tokenimage: null, tokendescription: null, content: null, error: "You need to provide valid Group Id/token Id" });
     }
 });
 
