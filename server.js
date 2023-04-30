@@ -7,7 +7,7 @@ import fetch from "node-fetch";
 import { ElectrumClient } from "electrum-cash";
 
 const electrum = new ElectrumClient(
-"Rostrum 7.0",
+"Rostrum",
 "1.4.3",
 "rostrum.nexa.ink",
 20004,
@@ -15,7 +15,7 @@ const electrum = new ElectrumClient(
 );
 
 await electrum.connect();
-console.log('ELectrum connected');
+console.log('Electrum connected');
 
 const app = express();
 app.use(express.json());
@@ -28,7 +28,7 @@ app.get('/', function(req, res) {
     res.render('index', { tokenimage: null, tokendescription: null, content: null, error: null });
 });
 
-app.post('/', async function(req, res) {
+app.post('/genesis', async function(req, res) {
     let tokenId = req.body.tokenid;
     if (tokenId = req.body.tokenid) {
         const genesisInfo = await electrum.request("token.genesis.info", tokenId);
@@ -48,6 +48,21 @@ app.post('/', async function(req, res) {
         } else if (url = !genesisInfo.document_url) {
             res.render('index', { tokenimage: null, tokendescription: null, content: null, error: "This token has no .json url or it is invalid" });  
         }
+    } else if (tokenId = !req.body.tokenid) {
+        res.render('index', { tokenimage: null, tokendescription: null, content: null, error: "You need to provide valid Group Id/token Id" });
+    }
+});
+
+app.post('/nftlist', async function(req, res) {
+    let tokenId = req.body.tokenid;
+    if (tokenId = req.body.tokenid) {
+        //const genesisInfo = await electrum.request("token.genesis.info", tokenId);
+        const subgroupInfo = await electrum.request("token.nft.list", tokenId);
+        res.render('index', { 
+        tokenimage: null, 
+        tokendescription: null, 
+        content: "Token subgroups info: " + JSON.stringify(subgroupInfo), 
+        error: null });
     } else if (tokenId = !req.body.tokenid) {
         res.render('index', { tokenimage: null, tokendescription: null, content: null, error: "You need to provide valid Group Id/token Id" });
     }
